@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/discussions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Discussions",
   "main": "index.js",
   "scripts": {
