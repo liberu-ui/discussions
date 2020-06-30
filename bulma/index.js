@@ -1,3 +1,3 @@
-import Discussion from '../src/bulma/Discussion.vue';
+import Discussions from '../src/bulma/Discussions.vue';
 
-export default Discussion;
+export default Discussions;
