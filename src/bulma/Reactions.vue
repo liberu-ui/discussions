@@ -40,7 +40,7 @@ export default {
 
     methods: {
         react() {
-            axios.post(this.route('core.discussions.react'), {
+            axios.post(this.route('core.discussions.reactions.toggle'), {
                 reactableId: this.reactable.id,
                 reactableType: this.type,
                 userId: this.user.id,

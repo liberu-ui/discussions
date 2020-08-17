@@ -155,7 +155,7 @@ export default {
 
     methods: {
         store() {
-            axios.post(this.route('core.discussions.storeReply'), this.reply)
+            axios.post(this.route('core.discussions.replies.store'), this.reply)
                 .then(({ data }) => {
                     this.discussion.replies.push(data);
                     this.reply = null;
@@ -163,12 +163,12 @@ export default {
                 .catch((error) => this.handleErorr(error));
         },
         update(reply, index) {
-            axios.patch(this.route('core.discussions.updateReply', reply.id), reply)
+            axios.patch(this.route('core.discussions.replies.update', reply.id), reply)
                 .then(({ data }) => this.discussion.replies.splice(index, 1, data))
                 .catch((error) => this.handleErorr(error));
         },
         destroy(reply, index) {
-            axios.delete(this.route('core.discussions.destroyReply', reply.id))
+            axios.delete(this.route('core.discussions.replies.destroy', reply.id))
                 .then(() => this.discussion.replies.splice(index, 1))
                 .catch((error) => this.handleErorr(error));
         },
