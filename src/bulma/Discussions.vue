@@ -46,7 +46,7 @@
                     </span>
                 </p>
                 <p class="control">
-                    <a class="button is-rounded is-small is-bold has-margin-left-medium"
+                    <a class="button is-rounded is-small is-bold ml-2"
                         @click="fetch()">
                         <span>
                             {{ i18n('Reload') }}
@@ -57,7 +57,7 @@
                     </a>
                 </p>
             </div>
-            <div class="discussions has-padding-small">
+            <div class="discussions p-1">
                 <div class="box has-background-light raises-on-hover"
                     v-for="(topic, index) in filteredDiscussions"
                     :key="index">

@@ -39,7 +39,7 @@
         <div class="media-right">
             <div class="is-flex is-pulled-right"
                 v-if="controls && reply.isEditable && !edit">
-                <a class="button is-naked is-small has-margin-right-small"
+                <a class="button is-naked is-small mr-1"
                     @click="edit = true">
                     <span class="icon is-small">
                         <fa icon="pencil-alt"/>

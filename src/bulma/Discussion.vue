@@ -1,6 +1,6 @@
 <template>
     <div class="discussion-wrapper">
-        <div class="box has-background-light raises-on-hover has-padding-large"
+        <div class="box has-background-light raises-on-hover p-3"
             @mouseover="controls = true"
             @mouseleave="controls = !confirmation ? false : controls">
             <article class="media">
@@ -44,12 +44,12 @@
                     </div>
                 </div>
             </article>
-            <div class="discussion-body has-padding-medium"
+            <div class="discussion-body p-2"
                 v-html="discussion.body"/>
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <reactions class="has-margin-top-medium"
+                        <reactions class="mt-2"
                             :reactable="discussion"
                             type="discussion"/>
                     </div>
@@ -83,7 +83,7 @@
             <span class="tag is-info is-rounded has-text-weight-bold">
                 {{ discussion.replies.length }}
             </span>
-            <span class="has-margin-left-medium">
+            <span class="ml-2">
                 {{ i18n('Replies') }}
             </span>
         </h5>

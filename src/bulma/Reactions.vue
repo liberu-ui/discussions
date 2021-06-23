@@ -1,8 +1,8 @@
 <template>
     <div class="is-flex">
-        <span class="clap-emoji is-clickable has-margin-right-large"
+        <span class="clap-emoji is-clickable mr-3"
             @click="react"/>
-        <figure class="image is-32x32 has-margin-left-small"
+        <figure class="image is-32x32 ml-1"
             v-for="reaction in reactable.reactions"
             :key="reaction.id"
             v-tooltip="reaction.owner.name">
