@@ -20,7 +20,7 @@
                         {{ timeFromNow(discussion.updatedAt || discussion.createdAt) }}
                     </small>
                     &bull;
-                    {{ discussion.body | string }}
+                    {{ body }}
                 </p>
             </div>
         </div>
@@ -37,14 +37,6 @@ import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDista
 
 export default {
     name: 'DiscussionPreview',
-
-    filters: {
-        string(html) {
-            const div = document.createElement('div');
-            div.innerHTML = html;
-            return div.textContent || div.innerText || '';
-        },
-    },
 
     inject: ['route'],
 
@@ -65,6 +57,11 @@ export default {
                 'core.avatars.show',
                 this.discussion.owner.avatar.id || 'null',
             );
+        },
+        body() {
+            const div = document.createElement('div');
+            div.innerHTML = this.discussion.body;
+            return div.textContent || div.innerText || '';
         },
     },
 
