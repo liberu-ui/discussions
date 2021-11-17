@@ -46,6 +46,7 @@ import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 
 import { quillEditor } from 'vue-quill-editor';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
 
@@ -58,7 +59,7 @@ library.add(faCheck, faBan);
 export default {
     name: 'Inputor',
 
-    components: { quillEditor },
+    components: { Fa, quillEditor },
 
     inject: ['errorHandler', 'i18n', 'route'],
 
@@ -81,7 +82,7 @@ export default {
         },
     },
 
-    data: (v) => ({
+    data: v => ({
         tribute: null,
         query: null,
         users: [],
@@ -101,7 +102,7 @@ export default {
                     [{ color: [] }, { background: [] }, 'clean'],
                 ],
                 mention: {
-                    template: (item) => v.template(item),
+                    template: item => v.template(item),
                 },
                 upload: {
                     handler: () => v.openFileBrowser(),
@@ -139,7 +140,7 @@ export default {
             }
         },
         taggedUsers() {
-            return this.tagged.filter((user) => this.message.body.indexOf(this.template(user)) > 0);
+            return this.tagged.filter(user => this.message.body.indexOf(this.template(user)) > 0);
         },
         upload($event) {
             const Editor = this.$refs.quillEditor.quill;

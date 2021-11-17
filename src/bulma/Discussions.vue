@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
 import Discussion from './Discussion.vue';
@@ -83,7 +84,9 @@ library.add(faPlus, faSearch, faSync);
 export default {
     name: 'Discussions',
 
-    components: { Discussion, DiscussionPreview, Inputor },
+    components: {
+        Fa, Discussion, DiscussionPreview, Inputor,
+    },
 
     inject: ['errorHandler', 'i18n', 'route'],
 
@@ -109,7 +112,7 @@ export default {
     computed: {
         filteredDiscussions() {
             return this.query
-                ? this.discussions.filter((discussion) => this.containsQuery(discussion))
+                ? this.discussions.filter(discussion => this.containsQuery(discussion))
                 : this.discussions;
         },
         count() {

@@ -111,6 +111,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import Confirmation from '@enso-ui/confirmation/bulma';
@@ -123,7 +124,9 @@ library.add(faArrowLeft, faTrashAlt, faPencilAlt);
 export default {
     name: 'Discussion',
 
-    components: { Reply, Reactions, Confirmation },
+    components: {
+        Fa, Reply, Reactions, Confirmation,
+    },
 
     inject: ['i18n', 'route'],
 
@@ -160,17 +163,17 @@ export default {
                     this.discussion.replies.push(data);
                     this.reply = null;
                 })
-                .catch((error) => this.handleErorr(error));
+                .catch(error => this.handleErorr(error));
         },
         update(reply, index) {
             axios.patch(this.route('core.discussions.updateReply', reply.id), reply)
                 .then(({ data }) => this.discussion.replies.splice(index, 1, data))
-                .catch((error) => this.handleErorr(error));
+                .catch(error => this.handleErorr(error));
         },
         destroy(reply, index) {
             axios.delete(this.route('core.discussions.destroyReply', reply.id))
                 .then(() => this.discussion.replies.splice(index, 1))
-                .catch((error) => this.handleErorr(error));
+                .catch(error => this.handleErorr(error));
         },
         timeFromNow(date) {
             return formatDistance(date);

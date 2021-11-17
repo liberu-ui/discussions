@@ -61,7 +61,7 @@
 </template>
 
 <script>
-
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
 import Inputor from './Inputor.vue';
@@ -69,9 +69,9 @@ import Inputor from './Inputor.vue';
 export default {
     name: 'Reply',
 
-    inject: ['i18n', 'route'],
+    components: { Fa, Inputor, Confirmation },
 
-    components: { Inputor, Confirmation },
+    inject: ['i18n', 'route'],
 
     props: {
         reply: {
