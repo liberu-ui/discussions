@@ -10,7 +10,7 @@
             </p>
         </figure>
         <div class="media-content">
-            <inputor class="raises-on-hover animated fadeIn"
+            <inputor class="raises-on-hover animate__animated animate__fadeIn"
                 :message="reply"
                 placeholder="Share your opinion..."
                 type="reply"
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import 'animate.css';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';

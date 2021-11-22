@@ -1,6 +1,6 @@
 <template>
     <div class="discussions-wrapper">
-        <inputor class="raises-on-hover animated fadeIn"
+        <inputor class="raises-on-hover animate__animated animate__fadeIn"
             :message="discussion"
             placeholder="Share your idea..."
             title
@@ -12,7 +12,7 @@
                 discussion = discussion.id ? discussion : null
             "
             v-if="inputor"/>
-        <discussion class="animated fadeIn"
+        <discussion class="animate__animated animate__fadeIn"
             :discussion="discussion"
             @edit="inputor = true"
             @back="discussion = null; fetch()"
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import 'animate.css';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
