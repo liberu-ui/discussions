@@ -10,14 +10,15 @@
             </p>
         </figure>
         <div class="media-content">
-            <inputor class="raises-on-hover animate__animated animate__fadeIn"
-                :message="reply"
-                placeholder="Share your opinion..."
-                type="reply"
-                @update="$emit('update'); edit = false;"
-                @store="$emit('store')"
-                @cancel="$emit('cancel'); edit = false;"
-                v-if="edit || !reply.id"/>
+            <fade v-if="edit || !reply.id">
+                <inputor class="raises-on-hover"
+                    :message="reply"
+                    placeholder="Share your opinion..."
+                    type="reply"
+                    @update="$emit('update'); edit = false;"
+                    @store="$emit('store')"
+                    @cancel="$emit('cancel'); edit = false;"/>
+            </fade>
             <div class="content" v-else>
                 <span class="has-text-info is-bold">
                     {{ reply.owner.name }}
@@ -61,7 +62,7 @@
 </template>
 
 <script>
-import 'animate.css';
+import { Fade } from '@enso-ui/transitions';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
@@ -70,7 +71,7 @@ import Inputor from './Inputor.vue';
 export default {
     name: 'Reply',
 
-    components: { Fa, Inputor, Confirmation },
+    components: { Fa, Fade, Inputor, Confirmation },
 
     inject: ['i18n', 'route'],
 

@@ -1,23 +1,24 @@
 <template>
     <div class="discussions-wrapper">
-        <inputor class="raises-on-hover animate__animated animate__fadeIn"
-            :message="discussion"
-            placeholder="Share your idea..."
-            title
-            type="discussion"
-            @store="store()"
-            @update="update()"
-            @cancel="
+        <fade v-if="inputor">
+            <inputor class="raises-on-hover"
+                :message="discussion"
+                placeholder="Share your idea..."
+                title
+                type="discussion"
+                @store="store()"
+                @update="update()"
+                @cancel="
                 inputor = false;
                 discussion = discussion.id ? discussion : null
-            "
-            v-if="inputor"/>
-        <discussion class="animate__animated animate__fadeIn"
-            :discussion="discussion"
-            @edit="inputor = true"
-            @back="discussion = null; fetch()"
-            @delete="destroy()"
-            v-else-if="discussion"/>
+                "/>
+        </fade>
+        <fade v-else-if="discussion">
+            <discussion :discussion="discussion"
+                @edit="inputor = true"
+                @back="discussion = null; fetch()"
+                @delete="destroy()"/>
+        </fade>
         <template v-else>
             <div class="field is-grouped">
                 <p class="control">
@@ -72,7 +73,7 @@
 </template>
 
 <script>
-import 'animate.css';
+import { Fade } from '@enso-ui/transitions';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
@@ -86,7 +87,7 @@ export default {
     name: 'Discussions',
 
     components: {
-        Fa, Discussion, DiscussionPreview, Inputor,
+        Fa, Fade, Discussion, DiscussionPreview, Inputor,
     },
 
     inject: ['errorHandler', 'i18n', 'route'],
