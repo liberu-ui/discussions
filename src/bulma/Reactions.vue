@@ -14,12 +14,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import { VTooltip } from 'v-tooltip';
 
 export default {
     name: 'Reactions',
-
-    directives: { tooltip: VTooltip },
 
     inject: ['errorHandler', 'route'],
 
