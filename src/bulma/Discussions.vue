@@ -103,6 +103,8 @@ export default {
         },
     },
 
+    emits: ['update'],
+
     data: () => ({
         query: '',
         inputor: false,

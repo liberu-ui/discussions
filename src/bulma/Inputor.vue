@@ -82,6 +82,8 @@ export default {
         },
     },
 
+    emits: ['cancel', 'update', 'store'],
+
     data: v => ({
         tribute: null,
         query: null,

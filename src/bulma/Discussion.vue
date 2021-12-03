@@ -137,6 +137,8 @@ export default {
         },
     },
 
+    emits: ['back', 'delete', 'edit'],
+
     data: () => ({
         controls: false,
         confirmation: false,

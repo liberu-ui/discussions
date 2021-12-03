@@ -82,6 +82,8 @@ export default {
         },
     },
 
+    emits: ['cancel', 'delete', 'store', 'update'],
+
     data: () => ({
         controls: false,
         confirmation: false,
