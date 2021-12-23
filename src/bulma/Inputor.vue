@@ -61,7 +61,7 @@ export default {
 
     components: { Fa, quillEditor },
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    inject: ['errorHandler', 'http', 'i18n', 'route'],
 
     props: {
         title: {
@@ -150,7 +150,7 @@ export default {
 
             formData.append('attachment', $event.target.files[0]);
 
-            axios.post(this.route('core.discussions.upload'), formData)
+            this.http.post(this.route('core.discussions.upload'), formData)
                 .then(({ data }) => {
                     Editor.insertEmbed(
                         Editor.getSelection().index,

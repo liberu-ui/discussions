@@ -128,7 +128,7 @@ export default {
         Fa, Reply, Reactions, Confirmation,
     },
 
-    inject: ['i18n', 'route'],
+    inject: ['http', 'i18n', 'route'],
 
     props: {
         discussion: {
@@ -160,7 +160,7 @@ export default {
 
     methods: {
         store() {
-            axios.post(this.route('core.discussions.storeReply'), this.reply)
+            this.http.post(this.route('core.discussions.storeReply'), this.reply)
                 .then(({ data }) => {
                     this.discussion.replies.push(data);
                     this.reply = null;
@@ -168,12 +168,12 @@ export default {
                 .catch(error => this.handleErorr(error));
         },
         update(reply, index) {
-            axios.patch(this.route('core.discussions.updateReply', reply.id), reply)
+            this.http.patch(this.route('core.discussions.updateReply', reply.id), reply)
                 .then(({ data }) => this.discussion.replies.splice(index, 1, data))
                 .catch(error => this.handleErorr(error));
         },
         destroy(reply, index) {
-            axios.delete(this.route('core.discussions.destroyReply', reply.id))
+            this.http.delete(this.route('core.discussions.destroyReply', reply.id))
                 .then(() => this.discussion.replies.splice(index, 1))
                 .catch(error => this.handleErorr(error));
         },

@@ -18,7 +18,7 @@ import { mapState } from 'vuex';
 export default {
     name: 'Reactions',
 
-    inject: ['errorHandler', 'route'],
+    inject: ['errorHandler', 'http', 'route'],
 
     props: {
         reactable: {
@@ -37,7 +37,7 @@ export default {
 
     methods: {
         react() {
-            axios.post(this.route('core.discussions.react'), {
+            this.http.post(this.route('core.discussions.react'), {
                 reactableId: this.reactable.id,
                 reactableType: this.type,
                 userId: this.user.id,

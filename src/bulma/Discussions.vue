@@ -90,7 +90,7 @@ export default {
         Fa, Fade, Discussion, DiscussionPreview, Inputor,
     },
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    inject: ['errorHandler', 'http', 'i18n', 'route'],
 
     props: {
         id: {
@@ -132,7 +132,7 @@ export default {
         fetch() {
             this.loading = true;
 
-            axios.get(this.route('core.discussions.index'), {
+            this.http.get(this.route('core.discussions.index'), {
                 params: {
                     discussable_id: this.id,
                     discussable_type: this.type,
@@ -144,7 +144,7 @@ export default {
             }).catch(this.errorHandler);
         },
         store() {
-            axios.post(this.route('core.discussions.store'), this.discussion)
+            this.http.post(this.route('core.discussions.store'), this.discussion)
                 .then(({ data }) => {
                     this.discussion = data;
                     this.discussions.unshift(this.discussion);
@@ -153,7 +153,7 @@ export default {
                 }).catch(this.errorHandler);
         },
         update() {
-            axios.patch(
+            this.http.patch(
                 this.route('core.discussions.update', this.discussion.id),
                 this.discussion,
             )
@@ -161,7 +161,7 @@ export default {
                 .catch(this.errorHandler);
         },
         destroy() {
-            axios.delete(this.route('core.discussions.destroy', this.discussion.id))
+            this.http.delete(this.route('core.discussions.destroy', this.discussion.id))
                 .then(() => {
                     const index = this.discussions.findIndex(({ id }) => id === this.discussion.id);
                     this.discussions.splice(index, 1);
