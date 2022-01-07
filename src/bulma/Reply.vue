@@ -71,7 +71,9 @@ import Inputor from './Inputor.vue';
 export default {
     name: 'Reply',
 
-    components: { Fa, Fade, Inputor, Confirmation },
+    components: {
+        Fa, Fade, Inputor, Confirmation,
+    },
 
     inject: ['i18n', 'route'],
 
