@@ -44,8 +44,8 @@
                     </div>
                 </div>
             </article>
-            <div class="discussion-body p-2"
-                v-html="discussion.body"/>
+            <!-- eslint-disable-next-line vue/no-v-html -->
+            <div class="discussion-body p-2" v-html="discussion.body"/>
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">

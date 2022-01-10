@@ -34,6 +34,7 @@
                     </small>
                 </span>
                 <br>
+                <!-- eslint-disable-next-line vue/no-v-html -->
                 <span v-html="format(reply.body)"/>
             </div>
         </div>
