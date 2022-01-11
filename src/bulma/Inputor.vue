@@ -4,18 +4,9 @@
             v-model="message.title"
             :placeholder="i18n('Title...')"
             v-if="title">
-        <quill-editor :options="options"
-            ref="quillEditor"
-            v-model="message.body"/>
-        <form ref="inputForm"
-            @submit.prevent>
-            <input id="file-upload"
-                class="is-invisible"
-                type="file"
-                ref="fileInput"
-                @change="upload($event)"
-                v-if="attachments">
-        </form>
+        <wysiwyg class="has-margin-top-large has-margin-bottom-large"
+             :has-error="false"
+             v-model="message.body"/>
         <div class="has-text-right">
             <a class="button is-small is-rounded"
                 @click="$emit('cancel')">
@@ -42,16 +33,13 @@
 </template>
 
 <script>
-import 'quill/dist/quill.core.css';
-import 'quill/dist/quill.snow.css';
 
-import { quillEditor } from 'vue-quill-editor';
+import Wysiwyg from '@enso-ui/wysiwyg/bulma';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
 
 import './mention/mention';
-import './upload/upload';
 import './mention/mention.scss';
 
 library.add(faCheck, faBan);
@@ -59,16 +47,12 @@ library.add(faCheck, faBan);
 export default {
     name: 'Inputor',
 
-    components: { Fa, quillEditor },
+    components: { Fa, Wysiwyg },
 
     inject: ['errorHandler', 'http', 'i18n', 'route'],
 
     props: {
         title: {
-            type: Boolean,
-            default: false,
-        },
-        attachments: {
             type: Boolean,
             default: false,
         },
@@ -95,9 +79,7 @@ export default {
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'strike'],
-                    v.attachments
-                        ? ['blockquote', 'code-block', 'image', 'link']
-                        : ['blockquote', 'code-block', 'link'],
+                    ['blockquote', 'code-block', 'link'],
                     [{ header: 1 }, { header: 2 }],
                     [{ list: 'ordered' }, { list: 'bullet' }],
                     [{ align: [] }],
@@ -105,9 +87,6 @@ export default {
                 ],
                 mention: {
                     template: item => v.template(item),
-                },
-                upload: {
-                    handler: () => v.openFileBrowser(),
                 },
             },
         },
@@ -143,23 +122,6 @@ export default {
         },
         taggedUsers() {
             return this.tagged.filter(user => this.message.body.indexOf(this.template(user)) > 0);
-        },
-        upload($event) {
-            const Editor = this.$refs.quillEditor.quill;
-            const formData = new FormData();
-
-            formData.append('attachment', $event.target.files[0]);
-
-            this.http.post(this.route('core.discussions.upload'), formData)
-                .then(({ data }) => {
-                    Editor.insertEmbed(
-                        Editor.getSelection().index,
-                        'image',
-                        this.route('core.discussions.showAttachment', data.id),
-                    );
-
-                    this.$refs.inputForm.reset();
-                }).catch(this.errorHandler);
         },
         avatar(avatarId) {
             return this.route('core.avatars.show', avatarId);
