@@ -4,8 +4,9 @@
             v-model="message.title"
             :placeholder="i18n('Title...')"
             v-if="title">
-        <wysiwyg v-model="message.body"
-            class="has-margin-top-large has-margin-bottom-large"/>
+        <wysiwyg class="has-margin-top-large has-margin-bottom-large"
+             :has-error="false"
+             v-model="message.body"/>
         <div class="has-text-right">
             <a class="button is-small is-rounded"
                 @click="$emit('cancel')">
@@ -34,6 +35,7 @@
 <script>
 
 import Wysiwyg from '@enso-ui/wysiwyg/bulma';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
 
@@ -45,9 +47,9 @@ library.add(faCheck, faBan);
 export default {
     name: 'Inputor',
 
-    components: { Wysiwyg },
+    components: { Fa, Wysiwyg },
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    inject: ['errorHandler', 'http', 'i18n', 'route'],
 
     props: {
         title: {
@@ -64,7 +66,9 @@ export default {
         },
     },
 
-    data: (v) => ({
+    emits: ['cancel', 'update', 'store'],
+
+    data: v => ({
         tribute: null,
         query: null,
         users: [],
@@ -82,7 +86,7 @@ export default {
                     [{ color: [] }, { background: [] }, 'clean'],
                 ],
                 mention: {
-                    template: (item) => v.template(item),
+                    template: item => v.template(item),
                 },
             },
         },
@@ -117,7 +121,7 @@ export default {
             }
         },
         taggedUsers() {
-            return this.tagged.filter((user) => this.message.body.indexOf(this.template(user)) > 0);
+            return this.tagged.filter(user => this.message.body.indexOf(this.template(user)) > 0);
         },
         avatar(avatarId) {
             return this.route('core.avatars.show', avatarId);

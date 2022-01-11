@@ -1,8 +1,8 @@
 <template>
     <div class="is-flex">
-        <span class="clap-emoji is-clickable has-margin-right-large"
+        <span class="clap-emoji is-clickable mr-3"
             @click="react"/>
-        <figure class="image is-32x32 has-margin-left-small"
+        <figure class="image is-32x32 ml-1"
             v-for="reaction in reactable.reactions"
             :key="reaction.id"
             v-tooltip="reaction.owner.name">
@@ -14,14 +14,11 @@
 
 <script>
 import { mapState } from 'vuex';
-import { VTooltip } from 'v-tooltip';
 
 export default {
     name: 'Reactions',
 
-    directives: { tooltip: VTooltip },
-
-    inject: ['errorHandler', 'route'],
+    inject: ['errorHandler', 'http', 'route'],
 
     props: {
         reactable: {
@@ -40,7 +37,7 @@ export default {
 
     methods: {
         react() {
-            axios.post(this.route('core.discussions.react'), {
+            this.http.post(this.route('core.discussions.react'), {
                 reactableId: this.reactable.id,
                 reactableType: this.type,
                 userId: this.user.id,
