@@ -4,9 +4,10 @@
             v-model="message.title"
             :placeholder="i18n('Title...')"
             v-if="title">
-        <wysiwyg class="has-margin-top-large has-margin-bottom-large"
-             :has-error="false"
-             v-model="message.body"/>
+<!--        <wysiwyg class="has-margin-top-large has-margin-bottom-large"
+                 :has-error="false"
+                 v-model="message.body"/>-->
+        <vue-trix v-model="message.body" placeholder="Enter content" localStorage/>
         <div class="has-text-right">
             <a class="button is-small is-rounded"
                 @click="$emit('cancel')">
@@ -34,7 +35,7 @@
 
 <script>
 
-import Wysiwyg from '@enso-ui/wysiwyg/bulma';
+import VueTrix from 'vue-trix';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
@@ -47,7 +48,7 @@ library.add(faCheck, faBan);
 export default {
     name: 'Inputor',
 
-    components: { Fa, Wysiwyg },
+    components: { Fa, VueTrix },
 
     inject: ['errorHandler', 'http', 'i18n', 'route'],
 
