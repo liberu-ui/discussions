@@ -10,14 +10,15 @@
             </p>
         </figure>
         <div class="media-content">
-            <inputor class="raises-on-hover animated fadeIn"
-                :message="reply"
-                placeholder="Share your opinion..."
-                type="reply"
-                @update="$emit('update'); edit = false;"
-                @store="$emit('store')"
-                @cancel="$emit('cancel'); edit = false;"
-                v-if="edit || !reply.id"/>
+            <fade v-if="edit || !reply.id">
+                <inputor class="raises-on-hover"
+                    :message="reply"
+                    placeholder="Share your opinion..."
+                    type="reply"
+                    @update="$emit('update'); edit = false;"
+                    @store="$emit('store')"
+                    @cancel="$emit('cancel'); edit = false;"/>
+            </fade>
             <div class="content" v-else>
                 <span class="has-text-info is-bold">
                     {{ reply.owner.name }}
@@ -33,6 +34,7 @@
                     </small>
                 </span>
                 <br>
+                <!-- eslint-disable-next-line vue/no-v-html -->
                 <span v-html="format(reply.body)"/>
             </div>
         </div>
@@ -61,7 +63,8 @@
 </template>
 
 <script>
-
+import { Fade } from '@enso-ui/transitions';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import Confirmation from '@enso-ui/confirmation/bulma';
 import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
 import Inputor from './Inputor.vue';
@@ -69,9 +72,11 @@ import Inputor from './Inputor.vue';
 export default {
     name: 'Reply',
 
-    inject: ['i18n', 'route'],
+    components: {
+        Fa, Fade, Inputor, Confirmation,
+    },
 
-    components: { Inputor, Confirmation },
+    inject: ['i18n', 'route'],
 
     props: {
         reply: {
@@ -79,6 +84,8 @@ export default {
             required: true,
         },
     },
+
+    emits: ['cancel', 'delete', 'store', 'update'],
 
     data: () => ({
         controls: false,

@@ -1,23 +1,24 @@
 <template>
     <div class="discussions-wrapper">
-        <inputor class="raises-on-hover animated fadeIn"
-            :message="discussion"
-            placeholder="Share your idea..."
-            title
-            type="discussion"
-            @store="store()"
-            @update="update()"
-            @cancel="
+        <fade v-if="inputor">
+            <inputor class="raises-on-hover"
+                :message="discussion"
+                placeholder="Share your idea..."
+                title
+                type="discussion"
+                @store="store()"
+                @update="update()"
+                @cancel="
                 inputor = false;
                 discussion = discussion.id ? discussion : null
-            "
-            v-if="inputor"/>
-        <discussion class="animated fadeIn"
-            :discussion="discussion"
-            @edit="inputor = true"
-            @back="discussion = null; fetch()"
-            @delete="destroy()"
-            v-else-if="discussion"/>
+                "/>
+        </fade>
+        <fade v-else-if="discussion">
+            <discussion :discussion="discussion"
+                @edit="inputor = true"
+                @back="discussion = null; fetch()"
+                @delete="destroy()"/>
+        </fade>
         <template v-else>
             <div class="field is-grouped">
                 <p class="control">
@@ -64,7 +65,7 @@
                     <discussion-preview class="is-clickable"
                         :discussion="topic"
                         :last="index === discussions.length - 1"
-                        @click.native="discussion = topic"/>
+                        @click="discussion = topic"/>
                 </div>
             </div>
         </template>
@@ -72,6 +73,8 @@
 </template>
 
 <script>
+import { Fade } from '@enso-ui/transitions';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
 import Discussion from './Discussion.vue';
@@ -83,9 +86,11 @@ library.add(faPlus, faSearch, faSync);
 export default {
     name: 'Discussions',
 
-    components: { Discussion, DiscussionPreview, Inputor },
+    components: {
+        Fa, Fade, Discussion, DiscussionPreview, Inputor,
+    },
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    inject: ['errorHandler', 'http', 'i18n', 'route'],
 
     props: {
         id: {
@@ -98,6 +103,8 @@ export default {
         },
     },
 
+    emits: ['update'],
+
     data: () => ({
         query: '',
         inputor: false,
@@ -109,7 +116,7 @@ export default {
     computed: {
         filteredDiscussions() {
             return this.query
-                ? this.discussions.filter((discussion) => this.containsQuery(discussion))
+                ? this.discussions.filter(discussion => this.containsQuery(discussion))
                 : this.discussions;
         },
         count() {
@@ -125,7 +132,7 @@ export default {
         fetch() {
             this.loading = true;
 
-            axios.get(this.route('core.discussions.index'), {
+            this.http.get(this.route('core.discussions.index'), {
                 params: {
                     discussable_id: this.id,
                     discussable_type: this.type,
@@ -137,7 +144,7 @@ export default {
             }).catch(this.errorHandler);
         },
         store() {
-            axios.post(this.route('core.discussions.store'), this.discussion)
+            this.http.post(this.route('core.discussions.store'), this.discussion)
                 .then(({ data }) => {
                     this.discussion = data;
                     this.discussions.unshift(this.discussion);
@@ -146,7 +153,7 @@ export default {
                 }).catch(this.errorHandler);
         },
         update() {
-            axios.patch(
+            this.http.patch(
                 this.route('core.discussions.update', this.discussion.id),
                 this.discussion,
             )
@@ -154,7 +161,7 @@ export default {
                 .catch(this.errorHandler);
         },
         destroy() {
-            axios.delete(this.route('core.discussions.destroy', this.discussion.id))
+            this.http.delete(this.route('core.discussions.destroy', this.discussion.id))
                 .then(() => {
                     const index = this.discussions.findIndex(({ id }) => id === this.discussion.id);
                     this.discussions.splice(index, 1);

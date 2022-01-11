@@ -46,6 +46,7 @@ import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 
 import { quillEditor } from 'vue-quill-editor';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
 
@@ -58,9 +59,9 @@ library.add(faCheck, faBan);
 export default {
     name: 'Inputor',
 
-    components: { quillEditor },
+    components: { Fa, quillEditor },
 
-    inject: ['errorHandler', 'i18n', 'route'],
+    inject: ['errorHandler', 'http', 'i18n', 'route'],
 
     props: {
         title: {
@@ -81,7 +82,9 @@ export default {
         },
     },
 
-    data: (v) => ({
+    emits: ['cancel', 'update', 'store'],
+
+    data: v => ({
         tribute: null,
         query: null,
         users: [],
@@ -101,7 +104,7 @@ export default {
                     [{ color: [] }, { background: [] }, 'clean'],
                 ],
                 mention: {
-                    template: (item) => v.template(item),
+                    template: item => v.template(item),
                 },
                 upload: {
                     handler: () => v.openFileBrowser(),
@@ -139,7 +142,7 @@ export default {
             }
         },
         taggedUsers() {
-            return this.tagged.filter((user) => this.message.body.indexOf(this.template(user)) > 0);
+            return this.tagged.filter(user => this.message.body.indexOf(this.template(user)) > 0);
         },
         upload($event) {
             const Editor = this.$refs.quillEditor.quill;
@@ -147,7 +150,7 @@ export default {
 
             formData.append('attachment', $event.target.files[0]);
 
-            axios.post(this.route('core.discussions.upload'), formData)
+            this.http.post(this.route('core.discussions.upload'), formData)
                 .then(({ data }) => {
                     Editor.insertEmbed(
                         Editor.getSelection().index,

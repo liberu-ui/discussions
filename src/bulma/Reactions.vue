@@ -14,14 +14,11 @@
 
 <script>
 import { mapState } from 'vuex';
-import { VTooltip } from 'v-tooltip';
 
 export default {
     name: 'Reactions',
 
-    directives: { tooltip: VTooltip },
-
-    inject: ['errorHandler', 'route'],
+    inject: ['errorHandler', 'http', 'route'],
 
     props: {
         reactable: {
@@ -40,7 +37,7 @@ export default {
 
     methods: {
         react() {
-            axios.post(this.route('core.discussions.react'), {
+            this.http.post(this.route('core.discussions.react'), {
                 reactableId: this.reactable.id,
                 reactableType: this.type,
                 userId: this.user.id,
