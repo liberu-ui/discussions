@@ -23,7 +23,7 @@
   "homepage": "https://github.com/@enso-ui/discussions#readme",
   "dependencies": {
     "@enso-ui/confirmation": "^2.0",
-    "@enso-ui/ui": "^5.0",
+    "@enso-ui/ui": "^6.0",
     "@enso-ui/transitions": "^2.0",
     "@enso-ui/wysiwyg": "^2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
