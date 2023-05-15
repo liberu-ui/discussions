@@ -1,5 +1,5 @@
 {
-  "name": "@cgdsoftware/discussions",
+  "name": "@liberu-ui/discussions",
   "version": "4.0.0",
   "description": "Discussions",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/@cgdsoftware/discussions.git"
+    "url": "git+https://github.com/@liberu-ui/discussions.git"
   },
   "keywords": [
     "discussions",
@@ -18,14 +18,14 @@
   "author": "Adrian Ocneanu <aocneanu@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/@cgdsoftware/discussions/issues"
+    "url": "https://github.com/@liberu-ui/discussions/issues"
   },
-  "homepage": "https://github.com/@cgdsoftware/discussions#readme",
+  "homepage": "https://github.com/@liberu-ui/discussions#readme",
   "dependencies": {
-    "@cgdsoftware/confirmation": "^2.0",
-    "@cgdsoftware/ui": "^6.0",
-    "@cgdsoftware/transitions": "^2.0",
-    "@cgdsoftware/wysiwyg": "^2.0",
+    "@liberu-ui/confirmation": "^2.0",
+    "@liberu-ui/ui": "^6.0",
+    "@liberu-ui/transitions": "^2.0",
+    "@liberu-ui/wysiwyg": "^2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "3.0.0-5",
