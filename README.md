@@ -1,10 +1,10 @@
 # Discussions
 
-![npm license](https://img.shields.io/npm/l/@enso-ui/discussions.svg) 
-![npm download](https://img.shields.io/npm/dm/@enso-ui/discussions.svg) 
-![GitHub top language](https://img.shields.io/github/languages/top/enso-ui/discussions.svg) 
-![GitHub issues](https://img.shields.io/github/issues/enso-ui/discussions.svg) 
-![npm version](https://img.shields.io/npm/v/@enso-ui/discussions.svg) 
+![npm license](https://img.shields.io/npm/l/@liberu-ui/discussions.svg) 
+![npm download](https://img.shields.io/npm/dm/@liberu-ui/discussions.svg) 
+![GitHub top language](https://img.shields.io/github/languages/top/liberu-ui/discussions.svg) 
+![GitHub issues](https://img.shields.io/github/issues/liberu-ui/discussions.svg) 
+![npm version](https://img.shields.io/npm/v/@liberu-ui/discussions.svg) 
 
 Discussions
 

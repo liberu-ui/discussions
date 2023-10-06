@@ -63,10 +63,10 @@
 </template>
 
 <script>
-import { Fade } from '@enso-ui/transitions';
+import { Fade } from '@liberu-ui/transitions';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import Confirmation from '@enso-ui/confirmation/bulma';
-import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
+import Confirmation from '@liberu-ui/confirmation/bulma';
+import formatDistance from '@liberu-ui/ui/src/modules/plugins/date-fns/formatDistance';
 import Inputor from './Inputor.vue';
 
 export default {
