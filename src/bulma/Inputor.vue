@@ -34,7 +34,7 @@
 
 <script>
 
-import Wysiwyg from '@enso-ui/wysiwyg/bulma';
+import Wysiwyg from '@liberu-ui/wysiwyg/bulma';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faBan } from '@fortawesome/free-solid-svg-icons';

@@ -114,8 +114,8 @@ import { mapState } from 'vuex';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import Confirmation from '@enso-ui/confirmation/bulma';
-import formatDistance from '@enso-ui/ui/src/modules/plugins/date-fns/formatDistance';
+import Confirmation from '@liberu-ui/confirmation/bulma';
+import formatDistance from '@liberu-ui/ui/src/modules/plugins/date-fns/formatDistance';
 import Reply from './Reply.vue';
 import Reactions from './Reactions.vue';
 
