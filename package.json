@@ -1,6 +1,6 @@
 {
   "name": "@liberu-ui/discussions",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Discussions",
   "main": "index.js",
   "scripts": {
