@@ -2,7 +2,7 @@
   "name": "@liberu-ui/discussions",
   "version": "4.0.5",
   "description": "Discussions",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
